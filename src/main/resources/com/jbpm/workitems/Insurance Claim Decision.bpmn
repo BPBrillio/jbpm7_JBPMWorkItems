@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.omg.org/bpmn20" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:bpsim="http://www.bpsim.org/schemas/1.0" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:drools="http://www.jboss.org/drools" id="_-NyXcPp0Ee2AaOirIA3Qvg" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd http://www.jboss.org/drools drools.xsd http://www.bpsim.org/schemas/1.0 bpsim.xsd http://www.omg.org/spec/DD/20100524/DC DC.xsd http://www.omg.org/spec/DD/20100524/DI DI.xsd " exporter="jBPM Process Modeler" exporterVersion="2.0" targetNamespace="http://www.omg.org/bpmn20">
+  <bpmn2:itemDefinition id="_hospitalNameItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_medicalIssueItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_claimDateItem" structureRef="java.util.Date"/>
+  <bpmn2:itemDefinition id="_nameItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_claimStatusItem" structureRef="String"/>
+  <bpmn2:itemDefinition id="_insuranceappItem" structureRef="com.jbpm.workitems.InsuranceApplication"/>
+  <bpmn2:itemDefinition id="_applicationIdItem" structureRef="String"/>
+  <bpmn2:process id="JBPMWorkItems.InsuranceClaimDecision" drools:packageName="com.jbpm.workitems" drools:version="1.0" drools:adHoc="false" name="Insurance Claim Decision" isExecutable="true" processType="Public">
+    <bpmn2:property id="hospitalName" itemSubjectRef="_hospitalNameItem" name="hospitalName"/>
+    <bpmn2:property id="medicalIssue" itemSubjectRef="_medicalIssueItem" name="medicalIssue"/>
+    <bpmn2:property id="claimDate" itemSubjectRef="_claimDateItem" name="claimDate"/>
+    <bpmn2:property id="name" itemSubjectRef="_nameItem" name="name"/>
+    <bpmn2:property id="claimStatus" itemSubjectRef="_claimStatusItem" name="claimStatus"/>
+    <bpmn2:property id="insuranceapp" itemSubjectRef="_insuranceappItem" name="insuranceapp"/>
+    <bpmn2:property id="applicationId" itemSubjectRef="_applicationIdItem" name="applicationId"/>
+    <bpmn2:sequenceFlow id="_C073F61E-1FCA-408C-B8AC-C4F9DCCCCC1D" sourceRef="_88EEF48B-0797-40C2-B1D5-632B6150214A" targetRef="_602F936D-168E-4DCE-98BF-0CC5685F6D1C">
+      <bpmn2:extensionElements>
+        <drools:metaData name="isAutoConnection.source">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="isAutoConnection.target">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_4FBC91F1-E9B1-41B2-B8E6-7AB9375C79BD" sourceRef="_24FAB0F5-6E2C-499F-8BA5-4CEE8E52075B" targetRef="_88EEF48B-0797-40C2-B1D5-632B6150214A">
+      <bpmn2:extensionElements>
+        <drools:metaData name="isAutoConnection.source">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="isAutoConnection.target">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:sequenceFlow id="_600A340F-667C-4C4F-8D4A-B2A921CB7E4A" sourceRef="_A5FD4C5C-4FBA-43C5-8C5F-2C5E8A8A4F99" targetRef="_24FAB0F5-6E2C-499F-8BA5-4CEE8E52075B">
+      <bpmn2:extensionElements>
+        <drools:metaData name="isAutoConnection.source">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+        <drools:metaData name="isAutoConnection.target">
+          <drools:metaValue><![CDATA[true]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+    </bpmn2:sequenceFlow>
+    <bpmn2:endEvent id="_602F936D-168E-4DCE-98BF-0CC5685F6D1C">
+      <bpmn2:incoming>_C073F61E-1FCA-408C-B8AC-C4F9DCCCCC1D</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:scriptTask id="_88EEF48B-0797-40C2-B1D5-632B6150214A" name="Claim Amount Calculation" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Claim Amount Calculation]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_4FBC91F1-E9B1-41B2-B8E6-7AB9375C79BD</bpmn2:incoming>
+      <bpmn2:outgoing>_C073F61E-1FCA-408C-B8AC-C4F9DCCCCC1D</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[com.jbpm.workitems.InsuranceApplication insuranceAppLocal = new com.jbpm.workitems.InsuranceApplication();
+if(insuranceapp.getClaimStatusList().contains(claimStatus)) { 
+    if(claimStatus.equals("Approval100")) { 
+        insuranceAppLocal.setFinalClaimAmt(insuranceapp.getOriginalClaimAmt()); 
+    } 
+    else if(claimStatus.equals("Approval80")) { 
+        insuranceAppLocal.setFinalClaimAmt(insuranceapp.getOriginalClaimAmt()*0.8);
+    }
+    else if(claimStatus.equals("Approval70")) { 
+        insuranceAppLocal.setFinalClaimAmt(insuranceapp.getOriginalClaimAmt()*0.7);
+    }
+    else if(claimStatus.equals("Approval50")) { 
+        insuranceAppLocal.setFinalClaimAmt(insuranceapp.getOriginalClaimAmt()*0.5);
+    }
+    else{
+        insuranceAppLocal.setFinalClaimAmt(0.0);
+    }
+}
+else{
+    insuranceAppLocal.setFinalClaimAmt(0.0);
+}]]></bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:scriptTask id="_24FAB0F5-6E2C-499F-8BA5-4CEE8E52075B" name="Create Approval List" scriptFormat="http://www.java.com/java">
+      <bpmn2:extensionElements>
+        <drools:metaData name="elementname">
+          <drools:metaValue><![CDATA[Create Approval List]]></drools:metaValue>
+        </drools:metaData>
+      </bpmn2:extensionElements>
+      <bpmn2:incoming>_600A340F-667C-4C4F-8D4A-B2A921CB7E4A</bpmn2:incoming>
+      <bpmn2:outgoing>_4FBC91F1-E9B1-41B2-B8E6-7AB9375C79BD</bpmn2:outgoing>
+      <bpmn2:script><![CDATA[java.util.List<String> claimStatusList = new java.util.ArrayList<String>();
+claimStatusList.add("Approval100");
+claimStatusList.add("Approval80");
+claimStatusList.add("Approval70");
+claimStatusList.add("Approval50");
+claimStatusList.add("Rejected");
+insuranceapp.setClaimStatusList(claimStatusList);
+kcontext.setVariable("insuranceapp",insuranceapp);
+]]></bpmn2:script>
+    </bpmn2:scriptTask>
+    <bpmn2:startEvent id="_A5FD4C5C-4FBA-43C5-8C5F-2C5E8A8A4F99">
+      <bpmn2:outgoing>_600A340F-667C-4C4F-8D4A-B2A921CB7E4A</bpmn2:outgoing>
+    </bpmn2:startEvent>
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="_-Ny-gPp0Ee2AaOirIA3Qvg">
+    <bpmndi:BPMNPlane id="_-Ny-gfp0Ee2AaOirIA3Qvg" bpmnElement="JBPMWorkItems.InsuranceClaimDecision">
+      <bpmndi:BPMNShape id="shape__A5FD4C5C-4FBA-43C5-8C5F-2C5E8A8A4F99" bpmnElement="_A5FD4C5C-4FBA-43C5-8C5F-2C5E8A8A4F99">
+        <dc:Bounds height="56.0" width="56.0" x="97.0" y="102.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__24FAB0F5-6E2C-499F-8BA5-4CEE8E52075B" bpmnElement="_24FAB0F5-6E2C-499F-8BA5-4CEE8E52075B">
+        <dc:Bounds height="102.0" width="154.0" x="233.0" y="79.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__88EEF48B-0797-40C2-B1D5-632B6150214A" bpmnElement="_88EEF48B-0797-40C2-B1D5-632B6150214A">
+        <dc:Bounds height="102.0" width="154.0" x="467.0" y="79.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="shape__602F936D-168E-4DCE-98BF-0CC5685F6D1C" bpmnElement="_602F936D-168E-4DCE-98BF-0CC5685F6D1C">
+        <dc:Bounds height="56.0" width="56.0" x="701.0" y="102.0"/>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge id="edge_shape__A5FD4C5C-4FBA-43C5-8C5F-2C5E8A8A4F99_to_shape__24FAB0F5-6E2C-499F-8BA5-4CEE8E52075B" bpmnElement="_600A340F-667C-4C4F-8D4A-B2A921CB7E4A">
+        <di:waypoint xsi:type="dc:Point" x="153.0" y="130.0"/>
+        <di:waypoint xsi:type="dc:Point" x="233.0" y="130.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__24FAB0F5-6E2C-499F-8BA5-4CEE8E52075B_to_shape__88EEF48B-0797-40C2-B1D5-632B6150214A" bpmnElement="_4FBC91F1-E9B1-41B2-B8E6-7AB9375C79BD">
+        <di:waypoint xsi:type="dc:Point" x="387.0" y="130.0"/>
+        <di:waypoint xsi:type="dc:Point" x="467.0" y="130.0"/>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="edge_shape__88EEF48B-0797-40C2-B1D5-632B6150214A_to_shape__602F936D-168E-4DCE-98BF-0CC5685F6D1C" bpmnElement="_C073F61E-1FCA-408C-B8AC-C4F9DCCCCC1D">
+        <di:waypoint xsi:type="dc:Point" x="621.0" y="130.0"/>
+        <di:waypoint xsi:type="dc:Point" x="701.0" y="130.0"/>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+  <bpmn2:relationship id="_-Ny-gvp0Ee2AaOirIA3Qvg" type="BPSimData">
+    <bpmn2:extensionElements>
+      <bpsim:BPSimData>
+        <bpsim:Scenario xsi:type="bpsim:Scenario" id="default" name="Simulationscenario">
+          <bpsim:ScenarioParameters xsi:type="bpsim:ScenarioParameters"/>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_A5FD4C5C-4FBA-43C5-8C5F-2C5E8A8A4F99" id="_-Ny-g_p0Ee2AaOirIA3Qvg">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:NormalDistribution mean="0.0" standardDeviation="0.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_24FAB0F5-6E2C-499F-8BA5-4CEE8E52075B" id="_-Ny-hPp0Ee2AaOirIA3Qvg">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:NormalDistribution mean="0.0" standardDeviation="0.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters xsi:type="bpsim:ResourceParameters">
+              <bpsim:Availability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+          <bpsim:ElementParameters xsi:type="bpsim:ElementParameters" elementRef="_88EEF48B-0797-40C2-B1D5-632B6150214A" id="_-Ny-hfp0Ee2AaOirIA3Qvg">
+            <bpsim:TimeParameters xsi:type="bpsim:TimeParameters">
+              <bpsim:ProcessingTime xsi:type="bpsim:Parameter">
+                <bpsim:NormalDistribution mean="0.0" standardDeviation="0.0"/>
+              </bpsim:ProcessingTime>
+            </bpsim:TimeParameters>
+            <bpsim:ResourceParameters xsi:type="bpsim:ResourceParameters">
+              <bpsim:Availability xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:Availability>
+              <bpsim:Quantity xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:Quantity>
+            </bpsim:ResourceParameters>
+            <bpsim:CostParameters xsi:type="bpsim:CostParameters">
+              <bpsim:UnitCost xsi:type="bpsim:Parameter">
+                <bpsim:FloatingParameter value="0.0"/>
+              </bpsim:UnitCost>
+            </bpsim:CostParameters>
+          </bpsim:ElementParameters>
+        </bpsim:Scenario>
+      </bpsim:BPSimData>
+    </bpmn2:extensionElements>
+    <bpmn2:source>_-NyXcPp0Ee2AaOirIA3Qvg</bpmn2:source>
+    <bpmn2:target>_-NyXcPp0Ee2AaOirIA3Qvg</bpmn2:target>
+  </bpmn2:relationship>
+</bpmn2:definitions>
